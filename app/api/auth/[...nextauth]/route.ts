@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: "Credentials",
     
       credentials: {
         username: { label: "email", type: "text", placeholder: "jsmith" },
