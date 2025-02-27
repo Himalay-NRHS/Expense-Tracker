@@ -40,9 +40,7 @@ export default function RootLayout({
           <Button variant="ghost" asChild className="hidden md:flex">
             <Link href="#features">Features</Link>
           </Button>
-          <Button variant="ghost" asChild className="hidden md:flex">
-            <Link href="#pricing">Pricing</Link>
-          </Button>
+         
           <Button variant="ghost" asChild className="hidden md:flex">
             <Link href="/signin">Sign In</Link>
           </Button>
@@ -61,9 +59,7 @@ export default function RootLayout({
                 <Link href="#features" className="block px-2 py-1 text-lg">
                   Features
                 </Link>
-                <Link href="#pricing" className="block px-2 py-1 text-lg">
-                  Pricing
-                </Link>
+                
                 <Link href="/signin" className="block px-2 py-1 text-lg">
                   Sign In
                 </Link>

@@ -11,7 +11,7 @@ export default function Home() {
         <div className="flex flex-col items-center space-y-4 text-center">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Manage Your Finances with Ease  {a}
+              Manage Your Finances with Ease 
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
               Track your expenses, monitor your income, and take control of your financial future with our powerful
@@ -61,13 +61,13 @@ export default function Home() {
         <p className="text-sm text-gray-500 dark:text-gray-400">© 2023 ExpenseTracker. All rights reserved.</p>
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           <a
-            href="mailto:contact@expensetracker.com"
+            href="mailto:himalayrekha@gmail.com"  target="_blank"
             className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
           >
-            contact@expensetracker.com
+            contact-himalayrekha@gmail.com
           </a>
           <a
-            href="https://github.com/expensetracker"
+            href="https://github.com/Himalay-NRHS/Expense-Tracker"  target="_blank"
             className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
           >
             GitHub
