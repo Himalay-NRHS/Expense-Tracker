@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
-import pgclient from "@/lib/db";
+//import pgclient from "@/lib/db";
+import prisma from "@/lib/db";
+import bcrypt from "bcryptjs";
 
 const handler = NextAuth({
   providers: [
@@ -12,20 +14,25 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-  
-        
-        const res = await pgclient.query("SELECT * FROM users WHERE email = $1 AND password = $2", [credentials?.email, credentials?.password]);
-        const user = res.rows[0];
-
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-  
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Missing email or password");
         }
+        const user = await prisma.users.findUnique({
+          where:{email:credentials?.email}
+        })
+       
+        if(!user){
+          throw new Error("Invalid email or password");
+        }
+        const passwordMatch = await bcrypt.compare(credentials.password, user.password);
+
+        if (!passwordMatch) {
+          throw new Error("Invalid credentials");
+        }
+       
+        return { ...user, id: user.id.toString() };
+
+        
       }
     })
   ]
