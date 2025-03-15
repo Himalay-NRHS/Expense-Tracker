@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
-
-
+import pgclient from "@/lib/db";
 
 const handler = NextAuth({
   providers: [
@@ -9,12 +8,16 @@ const handler = NextAuth({
       name: "Credentials",
     
       credentials: {
-        username: { label: "email", type: "text", placeholder: "jsmith" },
+        email: { label: "email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
   
+        
+        const res = await pgclient.query("SELECT * FROM users WHERE email = $1 AND password = $2", [credentials?.email, credentials?.password]);
+        const user = res.rows[0];
+
+
         if (user) {
           // Any object returned will be saved in `user` property of the JWT
           return user

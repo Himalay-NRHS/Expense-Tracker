@@ -41,11 +41,9 @@ export default function RootLayout({
             <Link href="#features">Features</Link>
           </Button>
          
-          <Button variant="ghost" asChild className="hidden md:flex">
-            <Link href="/signin">Sign In</Link>
-          </Button>
+         
           <Button asChild className="hidden md:flex">
-            <Link href="/signup">Sign Up</Link>
+            <Link href="/api/auth/signin">Sign in </Link>
           </Button>
           <Sheet>
             <SheetTrigger asChild>
