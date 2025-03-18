@@ -62,13 +62,13 @@ export default function Home() {
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           <a
             href="mailto:himalayrekha@gmail.com"  target="_blank"
-            className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300" rel="noreferrer"
           >
             contact-himalayrekha@gmail.com
           </a>
           <a
             href="https://github.com/Himalay-NRHS/Expense-Tracker"  target="_blank"
-            className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300" rel="noreferrer"
           >
             GitHub
           </a>

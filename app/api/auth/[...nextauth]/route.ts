@@ -75,6 +75,7 @@ const handler = NextAuth({
       if (session.user && token.email) {
         session.user.email = token.email;
       }
+      
       return session;
     },
   },

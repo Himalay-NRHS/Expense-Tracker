@@ -99,12 +99,9 @@ export function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
-  // Process data from backend
   useEffect(() => {
-    // In a real app, this would be a fetch call to your API
     const fetchData = async () => {
       try {
-        // Simulate API call delay
         await new Promise((resolve) => setTimeout(resolve, 500))
 
         // Convert object of objects to array
@@ -173,11 +170,11 @@ export function Dashboard() {
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div className="flex items-center space-x-2">
-          <Button onClick={() => router.push("/add-expense")}>
+          <Button onClick={() => router.push("/dashboard/add-expense")}>
             <PlusIcon className="mr-2 h-4 w-4" />
             Add Expense
           </Button>
-          <Button variant="outline" onClick={() => router.push("/add-income")}>
+          <Button variant="outline" onClick={() => router.push("/dashboard/add-income")}>
             <PlusIcon className="mr-2 h-4 w-4" />
             Add Income
           </Button>
