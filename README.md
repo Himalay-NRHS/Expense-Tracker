@@ -43,6 +43,4 @@ A simple web app to track your expenses and income. Built with Next.js, Prisma, 
 * Export data (CSV/PDF)
 * Budget limits per category
 
-## License
 
-MIT
