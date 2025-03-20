@@ -30,6 +30,7 @@ export default function AddExpensePage() {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [date, setDate] = useState<Date | undefined>(new Date())
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const [errors, setErrors] = useState<{
     amount?: string
@@ -37,7 +38,7 @@ export default function AddExpensePage() {
   
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     const newErrors: { amount?: string } = {}
@@ -60,8 +61,8 @@ export default function AddExpensePage() {
 
      
     };
-
-      fetch('/api/addExpense', {
+try{
+    const res= await fetch('/api/addExpense', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,6 +73,9 @@ export default function AddExpensePage() {
           if (!response.ok) {
             throw new Error('Failed to add income');
           }
+          
+          setAmount("");
+          setToastMessage("Income added successfully"); 
           return response.json();
         })
         .then(() => {
@@ -80,7 +84,16 @@ export default function AddExpensePage() {
         .catch(error => {
           console.error('Error adding income:', error);
         });
+
+          setAmount("");
+          setToastMessage("Income added successfully"); 
+      }catch(err){
+  
+        setToastMessage("Something went wrong");
+    
+      }
     }
+
   }
   if(session || status=="loading" ){
     return (

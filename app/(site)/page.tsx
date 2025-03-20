@@ -2,7 +2,7 @@ import type React from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { DollarSignIcon, HistoryIcon, PieChartIcon, PlusIcon } from "lucide-react"
-import a from "../lib/db"
+import Link from "next/link"
 export default function Home() {
   return (
     <div className="flex-1">
@@ -19,9 +19,13 @@ export default function Home() {
             </p>
           </div>
           <div className="space-x-4">
-            <Button size="lg">Get Started</Button>
+            <Button size="lg" > <Link href="/api/auth/signin" >
+         Get Started
+        </Link></Button>
             <Button variant="outline" size="lg">
-              Learn More
+            <Link href="/learn-more" >
+         Learn more
+        </Link>
             </Button>
           </div>
         </div>
