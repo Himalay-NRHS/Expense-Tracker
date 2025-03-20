@@ -15,7 +15,8 @@ A simple web app to track your expenses and income. Built with Next.js, Prisma, 
 * Next.js
 * Prisma ORM
 * PostgreSQL
-* Tailwind CSS (if used)
+* Next-Auth
+* Tailwind CSS 
 
 ## Setup Instructions
 
