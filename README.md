@@ -1,4 +1,4 @@
-# Expense Tracker
+# Expense Tracker(My simple Hobby project)
 
 A simple web app to track your expenses and income. Built with Next.js, Prisma, and PostgreSQL.
 
