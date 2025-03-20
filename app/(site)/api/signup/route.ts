@@ -1,7 +1,7 @@
 import pgclient from "@/lib/db";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/db";
-export async function POST(req: Request) {
+export async function POST(req:Request) {
     try{
     const { name, email, password } = await req.json();  
     const hashedPassword = await bcrypt.hash(password, 10);

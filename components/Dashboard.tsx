@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import { useSession, signIn, signOut } from "next-auth/react";
+
 
 interface Transaction {
   id: string
@@ -95,11 +97,13 @@ const categoryColors: Record<string, string> = {
 }
 
 export function Dashboard() {
+  const { data: session, status } = useSession();
+
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
-
-  useEffect(() => {
+ 
+ useEffect(() => {
     const fetchData = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 500))
@@ -164,7 +168,7 @@ export function Dashboard() {
       year: "numeric",
     }).format(date)
   }
-
+  if(session || status=="loading" ){
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
@@ -523,6 +527,16 @@ export function Dashboard() {
         }
       `}</style>
     </div>
-  )
+  )}
+  else{
+    return (
+      <div className="flex flex-col items-center justify-center h-screen space-y-4">
+        <h1 className="text-3xl font-bold">ExpenseTracker</h1>
+        <p className="text-lg text-muted-foreground">Track your expenses and income easily</p>
+        <Button onClick={() => signIn()}>Sign in to get started</Button>
+      </div>
+    )
+
+  }
 }
 

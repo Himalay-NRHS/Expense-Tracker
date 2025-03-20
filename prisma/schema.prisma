@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
+}    
 
 model users {
   id       Int    @id @default(autoincrement())
@@ -27,12 +27,11 @@ model Transaction {
   userId          Int
   amount          Int
   transactionType String   @db.VarChar(50)
-  expensecategory String   @db.VarChar(50)
-  expensename     String   @db.VarChar(50)
+  expensecategory String?  @db.VarChar(50)  // Optional
+  expensename     String?  @db.VarChar(50)  // Optional
   description     String   @db.VarChar(50)
   createdAt       DateTime @default(now())
-  
 
   // Foreign key relation
-  users            users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users           users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
