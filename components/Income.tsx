@@ -56,16 +56,16 @@ try{
           amount: Number(amount),
           transactionType: "income",
           expenseCategory: "NULL",
-          expenseName: "NULL",
+          expensename: "NULL",
           description: description || "NULL",
-          date: date?.toISOString() || new Date().toISOString(),
+          createdAt: date?.toISOString() || new Date().toISOString(),
           email: session?.user?.email,
         }),
       })
-
       if(res.ok){
         setAmount("");
         setToastMessage("Income added successfully"); 
+        router.push("/dashboard");
       }
     }catch(err){
 

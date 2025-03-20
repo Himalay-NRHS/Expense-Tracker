@@ -33,7 +33,7 @@ export default function LearnMorePage() {
             </div>
             <div className="space-x-4">
               <Button size="lg" asChild>
-                <Link href="/signup">Get Started for Free</Link>
+                <Link href="/api/auth/signin">Get Started for Free</Link>
               </Button>
             </div>
           </div>
@@ -365,7 +365,7 @@ export default function LearnMorePage() {
             </div>
             <div className="space-x-4">
               <Button size="lg" variant="secondary" asChild>
-                <Link href="/signup">
+                <Link  href="/api/auth/signin">
                   Get Started for Free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -378,16 +378,16 @@ export default function LearnMorePage() {
       {/* Footer */}
       <footer className="w-full py-6 bg-background">
         <div className="container px-4 md:px-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">© 2023 ExpenseTracker. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground"> 2025 ExpenseTracker</p>
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <Link
               href="mailto:contact@expensetracker.com"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
-              contact@expensetracker.com
+              himalayrekha@gmail.com
             </Link>
             <Link
-              href="https://github.com/expensetracker"
+              href="https://github.com/Himalay-NRHS/Expense-Tracker"
               className="text-sm text-muted-foreground hover:text-foreground"
             >
               GitHub

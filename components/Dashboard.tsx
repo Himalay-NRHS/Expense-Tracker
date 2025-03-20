@@ -15,8 +15,8 @@ interface Transaction {
   id: string
   amount: number
   transactionType: "income" | "expense"
-  expenseCategory: string | null
-  expenseName: string | null
+  expensecategory: string | null
+  expensename: string | null
   date: string
 }
 
@@ -25,64 +25,64 @@ const sampleBackendData: Record<string, Transaction> = {
     id: "t1",
     amount: 2500,
     transactionType: "income",
-    expenseCategory: null,
-    expenseName: null,
+    expensecategory: null,
+    expensename: null,
     date: "2023-04-01",
   },
   t2: {
     id: "t2",
     amount: 1500,
     transactionType: "income",
-    expenseCategory: null,
-    expenseName: null,
+    expensecategory: null,
+    expensename: null,
     date: "2023-04-15",
   },
   t3: {
     id: "t3",
     amount: 120,
     transactionType: "expense",
-    expenseCategory: "Food",
-    expenseName: "Groceries",
+    expensecategory: "Food",
+    expensename: "Groceries",
     date: "2023-04-03",
   },
   t4: {
     id: "t4",
     amount: 85,
     transactionType: "expense",
-    expenseCategory: "Food",
-    expenseName: "Restaurant",
+    expensecategory: "Food",
+    expensename: "Restaurant",
     date: "2023-04-10",
   },
   t5: {
     id: "t5",
     amount: 200,
     transactionType: "expense",
-    expenseCategory: "Bills",
-    expenseName: "Electricity",
+    expensecategory: "Bills",
+    expensename: "Electricity",
     date: "2023-04-05",
   },
   t6: {
     id: "t6",
     amount: 150,
     transactionType: "expense",
-    expenseCategory: "Bills",
-    expenseName: "Internet",
+    expensecategory: "Bills",
+    expensename: "Internet",
     date: "2023-04-07",
   },
   t7: {
     id: "t7",
     amount: 300,
     transactionType: "expense",
-    expenseCategory: "Travel",
-    expenseName: "Gas",
+    expensecategory: "Travel",
+    expensename: "Gas",
     date: "2023-04-12",
   },
   t8: {
     id: "t8",
     amount: 250,
     transactionType: "expense",
-    expenseCategory: "Shopping",
-    expenseName: "Clothes",
+    expensecategory: "Shopping",
+    expensename: "Clothes",
     date: "2023-04-18",
   },
 }
@@ -102,14 +102,60 @@ export function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
- 
+  async()=>{
+    const objects=await fetch("/api/transactions",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({data:session})
+    })
+    const data=await objects.json()
+    console.log(data)
+  }
+  const formatISODateToYYYYMMDD = (isoDateString: string) => {
+    try {
+      const date = new Date(isoDateString);
+      
+      // Check if the date is valid
+      if (isNaN(date.getTime())) {
+        console.warn(`Invalid date string: ${isoDateString}`);
+        return "2023-01-01"; // Return a default date if invalid
+      }
+      
+      // Format as YYYY-MM-DD
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      
+      return `${year}-${month}-${day}`;
+    } catch (error) {
+      console.error(`Error formatting date ${isoDateString}:`, error);
+      return "2023-01-01"; // Return a default date if there's an error
+    }
+  }
  useEffect(() => {
     const fetchData = async () => {
+      if (status === "loading") return; // wait for the session to finish loading
+      if (!session) return; //
       try {
-        await new Promise((resolve) => setTimeout(resolve, 500))
-
+        let objects=await fetch("/api/transactions",{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({data:session})
+        })
+        objects=await objects.json()
+        console.log(objects)
+      // const obj ={}
+      // objects.forEach
         // Convert object of objects to array
-        const transactionsArray = Object.values(sampleBackendData)
+
+        const transactionsArray = Object.values(objects).map(transaction => ({
+          ...transaction,
+          date: formatISODateToYYYYMMDD(transaction.date)
+        }));
 
         // Sort by date (newest first)
         transactionsArray.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -123,7 +169,7 @@ export function Dashboard() {
     }
 
     fetchData()
-  }, [])
+  }, [status])
 
   // Calculate summary data
   const totalIncome = transactions.filter((t) => t.transactionType === "income").reduce((sum, t) => sum + t.amount, 0)
@@ -138,7 +184,7 @@ export function Dashboard() {
   const expensesByCategory = transactions
     .filter((t) => t.transactionType === "expense")
     .reduce((acc: Record<string, number>, t) => {
-      const category = t.expenseCategory || "Other"
+      const category = t.expensecategory || "Other"
       acc[category] = (acc[category] || 0) + t.amount
       return acc
     }, {})
@@ -330,17 +376,17 @@ export function Dashboard() {
                         <div className="space-y-1 flex-1">
                           <div className="flex items-center">
                             <p className="text-sm font-medium leading-none">
-                              {transaction.transactionType === "income" ? "Income" : transaction.expenseName}
+                              {transaction.transactionType === "income" ? "Income" : transaction.expensename}
                             </p>
                             {transaction.transactionType === "expense" && (
                               <Badge
                                 className="ml-2"
                                 style={{
-                                  backgroundColor: categoryColors[transaction.expenseCategory || "Other"],
+                                  backgroundColor: categoryColors[transaction.expensecategory || "Other"],
                                   color: "white",
                                 }}
                               >
-                                {transaction.expenseCategory}
+                                {transaction.expensecategory}
                               </Badge>
                             )}
                           </div>
@@ -382,17 +428,17 @@ export function Dashboard() {
                       <div className="space-y-1 flex-1">
                         <div className="flex items-center">
                           <p className="text-sm font-medium leading-none">
-                            {transaction.transactionType === "income" ? "Income" : transaction.expenseName}
+                            {transaction.transactionType === "income" ? "Income" : transaction.expensename}
                           </p>
                           {transaction.transactionType === "expense" && (
                             <Badge
                               className="ml-2"
                               style={{
-                                backgroundColor: categoryColors[transaction.expenseCategory || "Other"],
+                                backgroundColor: categoryColors[transaction.expensecategory || "Other"],
                                 color: "white",
                               }}
                             >
-                              {transaction.expenseCategory}
+                              {transaction.expensecategory}
                             </Badge>
                           )}
                         </div>

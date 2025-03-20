@@ -62,7 +62,7 @@ export default function Home() {
 
     <footer className="w-full py-6 bg-gray-100 dark:bg-gray-800">
       <div className="container px-4 md:px-6 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-500 dark:text-gray-400">© 2023 ExpenseTracker. All rights reserved.</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400"> 2025 ExpenseTracker.</p>
         <div className="flex items-center space-x-4 mt-4 md:mt-0">
           <a
             href="mailto:himalayrekha@gmail.com"  target="_blank"
